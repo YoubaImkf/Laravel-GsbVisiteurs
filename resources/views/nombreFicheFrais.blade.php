@@ -18,15 +18,15 @@
 
       <tr>
          <td>
-         Nombre de fiche de frais:{{$ficheFrais['ficheFrais']}} 
+         Nombre de fiche de frais : {{ $ficheFrais['ficheFrais'] }} 
          </td>   <!--['ficheFrais'] correspond au as ficheFrais de la requette selectfiche-->
 		</tr>
       
       <tr>
          <td>
-         Nombre de ligne frais forfait :{{ $lignefraisforfait['lignefraisforfait'] }} 
+         Nombre de ligne frais forfait : {{ $lignefraisforfait['lignefraisforfait'] }} 
 
-         </td>   <!--[' lignefraisforfait'] correspond au as  lignefraisforfait de la requette selectlignefraisfiche-->
+          <!--[' lignefraisforfait'] correspond au as  lignefraisforfait de la requette selectlignefraisfiche-->
 		</tr>
    </table>
       

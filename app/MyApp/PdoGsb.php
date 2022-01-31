@@ -243,7 +243,6 @@ class PdoGsb{
 		// return $pdf->download('listeVisiteurs.pdf');
 		// $req = "select id,fichefrais.mois,idFraisForfait,quantite from visiteur,lignefraisforfait,fichefrais where visiteur.id = lignefraisforfait.idVisiteur and  visiteur.id = fichefrais.idVisiteur  ";
 		$req="Select COUNT(idVisiteur) as ficheFrais FROM FicheFrais,visiteur WHERE visiteur.id = fichefrais.idVisiteur and idVisiteur='$idVisiteur'";
-		
 		$rs = $this->monPdo->query($req);
 	 	$ligne = $rs->fetch();
 	  	return $ligne;
@@ -252,8 +251,7 @@ class PdoGsb{
 
 	public function selectionnelignefraisforfait($idVisiteur){
 		
-		$req="Select COUNT(idVisiteur) as lignefraisforfait FROM lignefraisforfait,visiteur WHERE visiteur.id = lignefraisforfait.idVisiteur and idVisiteur='$idVisiteur'";
-		
+		$req=" Select COUNT(idVisiteur) as lignefraisforfait FROM lignefraisforfait,visiteur WHERE visiteur.id = lignefraisforfait.idVisiteur and idVisiteur='$idVisiteur' ";
 		$rs = $this->monPdo->query($req);
 	 	$ligne = $rs->fetch();
 	  	return $ligne;
