@@ -38,21 +38,14 @@ class gestionnaireController extends Controller
             $gestionnaire = session('gestionnaire');
             $lesVisiteurs = PdoGsb::getVisiteur();
             // var_dump($lesVisiteurs); 
-            
-            
-            
             $visiteur = $request['Visiteur']; 
-        
             //recupere le name du  <select dans listeVisiteurs qui recup l'id et le nom 
             //select l'id du aray $lesVisiteurs pour lutiliser danns la fonction selectionneFicheVisiteur(!ici!!$leVisiteur!ici!!)et getNOMVisiteur();
             // var_dump($visiteur); 
-            
-            
-            
-
             // var_dump($leVisiteur);
             $nomVisiteur = PdoGsb::getNOMVisiteur($visiteur);
             var_dump($nomVisiteur);
+
             $ficheFrais = PdoGsb::selectionneFicheVisiteur($visiteur);
             $lignefraisforfait = PdoGsb::selectionnelignefraisforfait($visiteur);
             // var_dump($nomVisiteur);
@@ -66,7 +59,7 @@ class gestionnaireController extends Controller
                         ->with('lesVisiteurs', $lesVisiteurs)
                         ->with('nomVisiteur', $nomVisiteur)
                         ->with('ficheFrais',  $ficheFrais)
-                        ->with('visiteur',$visiteur)
+                   
                         ->with('lignefraisforfait',$lignefraisforfait);
                        
 
