@@ -1,7 +1,7 @@
 /* Styles des divisions principales de la page */
 
 body {
-    background-color: #77AADD;
+    background-color: #cfc2c2;
     background-image: url(imgs/FONDGLOBAL.jpg);
     background-repeat: repeat-x;
     margin: 0% 0%;
@@ -19,7 +19,7 @@ body {
 }
 
 #entete {
-    background-color: rgb(72, 198, 236);
+    background-color: #7499c7;
     color: #980101;
     border: solid 0.1em #980101;
     height: 154px;

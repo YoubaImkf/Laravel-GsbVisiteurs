@@ -18,7 +18,7 @@ class gestionnaireController extends Controller
        
               /**  
         * $leVisiteur correspond  @if ($visiteur['identite'] == $leVisiteur) ds listeVisieurs*/
-           	var_dump($nomVisiteur);
+           	
         
             return view('listeVisiteurs')
                         ->with('gestionnaire',$gestionnaire)
