@@ -10,10 +10,10 @@
 
           <select id="lstMois" name="Visiteur"> <!--est  $visiteur= $request['Visiteur'] dans controlller -->
               @foreach($lesVisiteurs as $visiteur)
-                  @if ($visiteur['identite'] ==  $nomVisiteur['identite']) <!--$nomVisiteur['identite'] correspond dans controler gestionnaireController "->with('leVisiteur',$leVisiteur)"-->
+                  @if ($visiteur['identite'] == $nomVisiteur['identite']) <!--$leVisiteur correspond dans controler gestionnaireController "->with('leVisiteur',$leVisiteur)"-->
                   
                     <option selected value="{{ $visiteur['id'] }}">
-                      <!--$visiteur['id']    Valeur envoyé a la variable Visiteur-->
+                      <!--Valeur envoyé a la variable Visiteur-->
                       {{ $visiteur['identite']}} 
                     </option>
                   @else 
@@ -23,7 +23,7 @@
                   @endif
               @endforeach
           </select>
-       
+        </p>
         </div>
         <div class="piedForm">
         <p>

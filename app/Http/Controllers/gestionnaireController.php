@@ -11,15 +11,22 @@ class gestionnaireController extends Controller
             $gestionnaire = session('gestionnaire');
             $lesVisiteurs = PdoGsb::getVisiteur();
             
-            
-            $leVisiteur = $lesVisiteurs[0]; /**  
+            $lesCles = array_keys( $lesVisiteurs );
+            $nomVisiteur = $lesCles[0];
+
+		    
+       
+              /**  
         * $leVisiteur correspond  @if ($visiteur['identite'] == $leVisiteur) ds listeVisieurs*/
-           		    
+           	var_dump($nomVisiteur);
+        
             return view('listeVisiteurs')
                         ->with('gestionnaire',$gestionnaire)
                         ->with('lesVisiteurs', $lesVisiteurs)
-                        ->with('leVisiteur',$leVisiteur);
-        }
+                    
+                        ->with('nomVisiteur', $nomVisiteur);
+        }              
+
         else{
             return view('connexion')->with('erreurs',null);
         }
@@ -34,18 +41,21 @@ class gestionnaireController extends Controller
             
             
             
-            $visiteur= $request['Visiteur']; 
+            $visiteur = $request['Visiteur']; 
+        
             //recupere le name du  <select dans listeVisiteurs qui recup l'id et le nom 
             //select l'id du aray $lesVisiteurs pour lutiliser danns la fonction selectionneFicheVisiteur(!ici!!$leVisiteur!ici!!)et getNOMVisiteur();
-            var_dump($visiteur); 
+            // var_dump($visiteur); 
+            
             
             
 
             // var_dump($leVisiteur);
-            $nomVisiteur =PdoGsb::getNOMVisiteur($visiteur);
+            $nomVisiteur = PdoGsb::getNOMVisiteur($visiteur);
+            var_dump($nomVisiteur);
             $ficheFrais = PdoGsb::selectionneFicheVisiteur($visiteur);
             $lignefraisforfait = PdoGsb::selectionnelignefraisforfait($visiteur);
-            // var_dump($ficheFrais);
+            // var_dump($nomVisiteur);
             
             // if(il a des fiche frais alors on affiche)
 
@@ -58,7 +68,7 @@ class gestionnaireController extends Controller
                         ->with('ficheFrais',  $ficheFrais)
                         ->with('visiteur',$visiteur)
                         ->with('lignefraisforfait',$lignefraisforfait);
-                        
+                       
 
         
         }
