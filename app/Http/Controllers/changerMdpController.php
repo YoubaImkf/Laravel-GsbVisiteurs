@@ -29,30 +29,33 @@ class changerMdpController extends Controller
         if(session('visiteur') != null){
             $visiteur = session('visiteur');
             $idVisiteur = $visiteur['id'];
-            $mdpVisiteur =  $request['mdp'];
+            $mdpVisiteur1 =  $request['mdp1'];
+            $mdpVisiteur2 =  $request['mdp2'];
+
             $date = $request['dateEmbauche'];
             var_dump($date);
             $dateEmbauche = PdoGsb::getDateEmbaucheVisiteur($idVisiteur);
             var_dump($dateEmbauche);
 
-                if($date==$dateEmbauche['dateEmbauche']) //$dateEmbauche=array
+                if($date==$dateEmbauche['dateEmbauche'] && $mdpVisiteur1 == $mdpVisiteur2  ) 
+                //$dateEmbauche=array                 //|| on match  les mdp
                 {     
                     $erreurs = null;
                     // $majMd=
-                    PdoGsb::modifierMotDePasse($idVisiteur, $mdpVisiteur);
+                    PdoGsb::modifierMotDePasse($idVisiteur, $mdpVisiteur1);
                 
                     $message = "Votre Mdp a été mise à jour"; //permet de stocker notre erreur
                 }
                 else{
                     $erreurs[] ="Vous devez rentrer votre date d'embauche";
-                    $message =" eh bah nan, CHEH !!";;
+                    $message =" veuillez entrer le meme mdp";;
                 }
             
             return view('motDePasse')       
                                     ->with('erreurs',$erreurs)
                                     ->with('message',$message) //message retourner
                                     ->with('visiteur',$visiteur) 
-                                    ->with( 'mdp',$mdpVisiteur)                               
+                                                                  
                                     // ->with('majMdp',$majMdp)
                                     ->with('dateEmbauche',$dateEmbauche);
                                    

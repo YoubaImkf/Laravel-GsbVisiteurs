@@ -19,12 +19,12 @@
 
         <p>
         <label for = "mdp">Nouveau Mot de passe*</label>
-        <input id = "mdp"  type = "password"  name = "mdp" size = "30" maxlength = "45" required>
+        <input id = "mdp"  type = "password"  name = "mdp1" size = "30" maxlength = "45" required>
         </p>
 
         <p>
         <label for = "mdp">Retaper le nouveau Mot de passe*</label>
-        <input id = "mdp"  type = "password"  name = "mdp" size = "30" maxlength = "45" required>
+        <input id = "mdp"  type = "password"  name = "mdp2" size = "30" maxlength = "45" required>
         </p>
 
 
