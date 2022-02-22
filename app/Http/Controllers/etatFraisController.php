@@ -53,7 +53,8 @@ class etatFraisController extends Controller
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif =  $lesInfosFicheFrais['dateModif'];
             $dateModifFr = MyDate::getFormatFrançais($dateModif);
-            $vue = view('listefrais')->with('lesMois', $lesMois)
+            $vue = view('listefrais')
+                    ->with('lesMois', $lesMois)
                     ->with('leMois', $leMois)
                     ->with('numAnnee',$numAnnee)
                     ->with('numMois',$numMois)

@@ -21,6 +21,7 @@ Route::post('/',[
         'as'=>'chemin_valider',
         'uses'=>'connexionController@valider'
 ]);
+
 Route::get('deconnexion',[
         'as'=>'chemin_deconnexion',
         'uses'=>'connexionController@deconnecter'
@@ -84,3 +85,4 @@ Route::post('sauvegarderMdp',[  //on peut mettre 'changeMdp' ici et ne plus avoi
         'as'=>'chemin_sauvegardeMdp',
         'uses'=>'changerMdpController@sauvegarderMdp'
 ]);
+

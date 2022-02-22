@@ -249,8 +249,7 @@ class PdoGsb{
 	}
 
 
-	public function selectionnelignefraisforfait($idVisiteur){
-		
+	public function selectionnelignefraisforfait($idVisiteur){	
 		$req=" Select COUNT(idVisiteur) as lignefraisforfait FROM lignefraisforfait,visiteur WHERE visiteur.id = lignefraisforfait.idVisiteur and idVisiteur='$idVisiteur' ";
 		$rs = $this->monPdo->query($req);
 	 	$ligne = $rs->fetch();
@@ -269,12 +268,10 @@ class PdoGsb{
 		$req = "SELECT dateEmbauche FROM visiteur where id='$id'";
 		$rs = $this->monPdo->query($req);
 		$ligne = $rs->fetch(PDO::FETCH_ASSOC);
-		return $ligne;
-		
+		return $ligne;	
 	}
 
 	public function modifierMotDePasse($id, $mdp){
-
 		$req = "Update visiteur set mdp='$mdp' where id='$id' ";
 		$this->monPdo->exec($req);
 	}

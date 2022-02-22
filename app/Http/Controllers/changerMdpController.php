@@ -31,11 +31,11 @@ class changerMdpController extends Controller
             $idVisiteur = $visiteur['id'];
             $mdpVisiteur1 =  $request['mdp1'];
             $mdpVisiteur2 =  $request['mdp2'];
-
+            
             $date = $request['dateEmbauche'];
-            var_dump($date);
+            // var_dump($date);
             $dateEmbauche = PdoGsb::getDateEmbaucheVisiteur($idVisiteur);
-            var_dump($dateEmbauche);
+            // var_dump($dateEmbauche);
 
                 if($date==$dateEmbauche['dateEmbauche'] && $mdpVisiteur1 == $mdpVisiteur2  ) 
                 //$dateEmbauche=array                 //|| on match  les mdp

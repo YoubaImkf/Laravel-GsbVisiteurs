@@ -8,6 +8,7 @@
         <div class="corpsForm"><p>
           <label for="lstMois" >Mois : </label>
           <select id="lstMois" name="lstMois">
+
               @foreach($lesMois as $mois)
                   @if ($mois['mois'] == $leMois)
                     <option selected value="{{ $mois['mois']}}">
@@ -19,6 +20,7 @@
                     </option>
                   @endif
               @endforeach
+              
           </select>
         </p>
         </div>
