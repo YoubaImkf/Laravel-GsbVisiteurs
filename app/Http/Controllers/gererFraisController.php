@@ -32,7 +32,7 @@ class gererFraisController extends Controller{
     }
     
     function sauvegarderFrais(Request $request){
-        if( session('visiteur')!= null){
+            if( session('visiteur')!= null){
             $visiteur = session('visiteur');
             $idVisiteur = $visiteur['id'];
             $anneeMois = MyDate::getAnneeMoisCourant();
@@ -53,7 +53,7 @@ class gererFraisController extends Controller{
                                         ->with ('method',$request->method());
             if($nbNumeric == 4){
                 $message = "Votre fiche a été mise à jour";
-                $erreurs = null;
+                
                 PdoGsb::majFraisForfait($idVisiteur,$mois,$lesFrais);
         	}
 		    else{

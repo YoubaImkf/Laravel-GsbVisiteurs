@@ -10,7 +10,7 @@ class PdoGsb{
         private static $mdp;
         private  $monPdo;
 	
-/**
+/**$lesVisiteurs
  * crée l'instance de PDO qui sera sollicitée
  * pour toutes les méthodes de la classe
  */				
