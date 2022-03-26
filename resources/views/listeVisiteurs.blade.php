@@ -10,7 +10,8 @@
 
           <select id="lstMois" name="Visiteur"> <!--est  $visiteur= $request['Visiteur'] dans controlller -->
               @foreach($lesVisiteurs as $visiteur)
-                  @if ($visiteur['identite'] == $nomVisiteur['identite']) <!--$leVisiteur correspond dans controler gestionnaireController "->with('leVisiteur',$leVisiteur)"-->
+                  @if ($visiteur['identite'] == $nomVisiteur['identite']) <!--$lesVisiteur correspond dans controler gestionnaireController "->with('lesVisiteur',$lesVisiteur)"
+                  $nomVisiteur controller-selectionnerVisiteur-->
                   
                     <option selected value="{{ $visiteur['id'] }}">
                       <!--Valeur envoyé a la variable Visiteur-->
