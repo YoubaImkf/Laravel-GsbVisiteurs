@@ -11,8 +11,8 @@ class gestionnaireController extends Controller
             $gestionnaire = session('gestionnaire');
             $lesVisiteurs = PdoGsb::getVisiteur();
             
-            // $lesCles = array_keys( $lesVisiteurs );
-            // $nomVisiteur = $lesCles[0];
+            $lesCles = array_keys( $lesVisiteurs );
+            $nomVisiteur = $lesCles[0];
 
 		          
      /** $leVisiteur correspond  @if ($visiteur['identite'] == $leVisiteur) ds listeVisieurs*/
@@ -20,8 +20,8 @@ class gestionnaireController extends Controller
         
             return view('listeVisiteurs')
                         ->with('gestionnaire',$gestionnaire)
-                        ->with('lesVisiteurs', $lesVisiteurs);                 
-                        // ->with('nomVisiteur', $nomVisiteur);
+                        ->with('lesVisiteurs', $lesVisiteurs)                
+                        ->with('nomVisiteur', $nomVisiteur);
         }              
 
         else{
