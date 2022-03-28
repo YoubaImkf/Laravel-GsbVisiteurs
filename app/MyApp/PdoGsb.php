@@ -232,7 +232,7 @@ class PdoGsb{
 	}
 	
 	public function getNOMVisiteur($id){
-		$req = "SELECT CONCAT(nom ,' ', prenom) as identite FROM visiteur where id='$id'";
+		$req = "SELECT id,CONCAT(nom ,' ', prenom) as identite FROM visiteur where id='$id'";
     	$rs = $this->monPdo->query($req);
 		$ligne = $rs->fetch();
 		return $ligne;

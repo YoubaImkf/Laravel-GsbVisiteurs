@@ -6,11 +6,12 @@
       <form action="{{ route('chemin_selectionVisiteurs') }}" method="post">
         {{ csrf_field() }} <!-- laravel va ajouter un champ caché avec un token -->
         <div class="corpsForm"><p>
-          <label for="lstVisiteur" >Visiteur : </label>
+          <label for="Visiteur" >Visiteur : </label>
 
-          <select id="lstMois" name="Visiteur"> <!--est  $visiteur= $request['Visiteur'] dans controlller -->
+          <select id="Visiteur" name="Visiteur"> <!--est  $visiteur= $request['Visiteur'] dans controlller -->
               @foreach($lesVisiteurs as $visiteur)
-                  @if ($visiteur['identite'] == $nomVisiteur['identite']) <!--$lesVisiteur correspond dans controler gestionnaireController "->with('lesVisiteur',$lesVisiteur)"
+                  @if ($visiteur['identite'] == $nomVisiteur) 
+                  <!--$lesVisiteur correspond dans controler gestionnaireController "->with('lesVisiteur',$lesVisiteur)"
                   $nomVisiteur controller-selectionnerVisiteur-->
                   
                     <option selected value="{{ $visiteur['id'] }}">
