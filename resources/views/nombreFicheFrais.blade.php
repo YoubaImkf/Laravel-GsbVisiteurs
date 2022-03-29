@@ -2,7 +2,7 @@
 @section('contenu2')
 
 
-<h3>Fiche de frais de {{  $nomVisiteur['identite'] }} | <a href="" OnClick="return confirm('Voulez vous vraiment supprimer ce visiteur ?');">supprimer</a>
+<h3>Fiche de frais de {{  $identite['identite'] }} | <a href="" OnClick="return confirm('Voulez vous vraiment supprimer ce visiteur ?');">supprimer</a>
 <!-- --></h3>
     <div class="encadre">
     <p>
@@ -24,7 +24,7 @@
       
       <tr>
          <td>
-         Nombre de ligne frais forfait : {{ $lignefraisforfait['lignefraisforfait'] }} 
+         Nombre de ligne(s) frais forfait : {{ $lignefraisforfait['lignefraisforfait'] }} 
 
           <!--[' lignefraisforfait'] correspond au as  lignefraisforfait de la requette selectlignefraisfiche-->
 		</tr>

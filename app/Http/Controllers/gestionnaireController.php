@@ -6,30 +6,23 @@ use Illuminate\Http\Request;
 
 class gestionnaireController extends Controller
 {
-    function listerVisiteurs(){
+    function listerVisiteur(){
         if(session('gestionnaire') != null){
             $gestionnaire = session('gestionnaire');
-            $lesVisiteurs = PdoGsb::getVisiteur();
-
-            $lesCles = array($lesVisiteurs);
-            $nomVisiteur = $lesCles[0];
-
-		          
-     /** $leVisiteur correspond  @if ($visiteur['identite'] == $leVisiteur) ds listeVisieurs*/
-           	
-        
-            return view('listeVisiteurs')
-                        ->with('gestionnaire',$gestionnaire)
-                        ->with('nomVisiteur',$nomVisiteur)
-                        
-                        ->with('lesVisiteurs', $lesVisiteurs);                 
-                        // ->with('nomVisiteur', $nomVisiteur);
-        }              
-
-        else{
+            $lesVisiteurs = PdoGsb::getVisiteur();//recupère tous les visiteurs
+            $leVisiteur = " ";
+		//    dd($leVisiteur);
+          
+            return view('listeVisiteur')
+                        ->with('lesVisiteurs',$lesVisiteurs)
+                        ->with('gestionnaire', $gestionnaire)
+                        ->with('leVisiteur', $leVisiteur);
+                   
+        }
+        else
+        {
             return view('connexion')->with('erreurs',null);
         }
-
     }
 
     function selectionnerVisiteur(Request $request){
@@ -37,15 +30,15 @@ class gestionnaireController extends Controller
             $gestionnaire = session('gestionnaire');
             $lesVisiteurs = PdoGsb::getVisiteur();
             // var_dump($lesVisiteurs); 
-            $visiteur = $request['Visiteur'];
+            $visiteur = $request['lstVisiteur'];
                     
 
             //recupere le name du  <select dans listeVisiteurs qui recup l'id et le nom 
             //select l'id du aray $lesVisiteurs pour lutiliser danns la fonction selectionneFicheVisiteur(!ici!!$leVisiteur!ici!!)et getNOMVisiteur();
             // var_dump($visiteur); 
             // var_dump($leVisiteur);
-            $nomVisiteur = PdoGsb::getNOMVisiteur($visiteur);
-            var_dump($nomVisiteur);
+            $identite = PdoGsb::getNOMVisiteur($visiteur);
+            // var_dump($nomVisiteur);
 
             $ficheFrais = PdoGsb::selectionneFicheVisiteur($visiteur);
             $lignefraisforfait = PdoGsb::selectionnelignefraisforfait($visiteur);
@@ -58,7 +51,9 @@ class gestionnaireController extends Controller
             return view('nombreFicheFrais')
                         ->with('gestionnaire',$gestionnaire)
                         ->with('lesVisiteurs', $lesVisiteurs)
-                        ->with('nomVisiteur', $nomVisiteur)
+                        ->with('identite', $identite)
+                        ->with('leVisiteur',$visiteur)
+                        //on fait en sorte de dire que "leVisiteur" de ListerVisiteur soit egal au $visiteur de la fonctionse lectionnerVisiteur
                         ->with('ficheFrais',  $ficheFrais)
                         ->with('lignefraisforfait',$lignefraisforfait);
                        
