@@ -63,6 +63,10 @@ Route::post('selectionVisiteur',[
         'uses'=>'gestionnaireController@selectionnerVisiteur'
 ]);
 
+Route::post('archiveVisiteur',[
+        'as'=>'chemin_archiveVisiteur',
+        'uses'=>'gestionnaireController@archiveVisiteur'
+]);
 
 
   /*-----------------------------------------------------------------------------------------------*/

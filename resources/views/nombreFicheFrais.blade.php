@@ -2,7 +2,11 @@
 @section('contenu2')
 
 
-<h3>Fiche de frais de {{  $identite['identite'] }} | <a href="" OnClick="return confirm('Voulez vous vraiment supprimer ce visiteur ?');">supprimer</a>
+<h3>Fiche de frais de {{  $identite['identite'] }} | 
+<form method="post" action="{{ route('chemin_archiveVisiteur')}}"> <!-- chemin est dans Route/Web -->
+   {{ csrf_field()}}
+   <button type="submit"  OnClick="return confirm('Voulez vous vraiment supprimer ce visiteur ?');">supp</button>
+</form>
 <!-- --></h3>
     <div class="encadre">
     <p>

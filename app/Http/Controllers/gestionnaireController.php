@@ -28,11 +28,10 @@ class gestionnaireController extends Controller
     function selectionnerVisiteur(Request $request){
         if(session('gestionnaire') != null){
             $gestionnaire = session('gestionnaire');
+          
             $lesVisiteurs = PdoGsb::getVisiteur();
-            // var_dump($lesVisiteurs); 
             $visiteur = $request['lstVisiteur'];
-                    
-
+            session(['idVisiteur' => $visiteur]);
             //recupere le name du  <select dans listeVisiteurs qui recup l'id et le nom 
             //select l'id du aray $lesVisiteurs pour lutiliser danns la fonction selectionneFicheVisiteur(!ici!!$leVisiteur!ici!!)et getNOMVisiteur();
             // var_dump($visiteur); 
@@ -47,7 +46,7 @@ class gestionnaireController extends Controller
             // if(il a des fiche frais alors on affiche)
 
             
-
+            
             return view('nombreFicheFrais')
                         ->with('gestionnaire',$gestionnaire)
                         ->with('lesVisiteurs', $lesVisiteurs)
@@ -56,9 +55,44 @@ class gestionnaireController extends Controller
                         //on fait en sorte de dire que "leVisiteur" de ListerVisiteur soit egal au $visiteur de la fonctionse lectionnerVisiteur
                         ->with('ficheFrais',  $ficheFrais)
                         ->with('lignefraisforfait',$lignefraisforfait);
-                       
-
         
         }
+
     }
+
+    function archiveVisiteur(){
+        if(session('gestionnaire') != null){
+            $gestionnaire = session('gestionnaire'); 
+            $idVisiteur = session('idVisiteur');
+            $identite = PdoGsb::getNOMVisiteur($idVisiteur );
+
+            $infoVisiteur = PdoGsb::getInfosVisiteurArchive($idVisiteur);
+        
+            $leVisiteur = " ";
+            $idVisi=$infoVisiteur['id'];
+            
+            $nomVisi=$infoVisiteur['nom'];
+            $prenomVisi=$infoVisiteur['prenom'];
+            $loginVisi = $infoVisiteur['login'];
+            $mdpVisi = $infoVisiteur['mdp'];
+            $adresseVisi = $infoVisiteur['adresse'];
+            $cpVisi = $infoVisiteur['cp'];
+            $villeVisi = $infoVisiteur['ville'];
+            $datEmbaucheVisi = $infoVisiteur['dateEmbauche'];
+
+            PdoGsb::archiverVisiteur($idVisi,$nomVisi,$prenomVisi,$loginVisi,$mdpVisi,$adresseVisi,$cpVisi,$villeVisi,$datEmbaucheVisi);
+        
+            PdoGsb::supprimerVisiteur($idVisiteur);
+            $lesVisiteurs = PdoGsb::getVisiteur();
+
+            return view('listeVisiteurs')
+                        ->with('gestionnaire',$gestionnaire)
+                        ->with('leVisiteur',$leVisiteur)
+                        ->with('lesVisiteurs', $lesVisiteurs)
+                        ->with('identite', $identite)
+                        ->with('idVisiteur ',$idVisiteur);
+    }
+
+
+  }
 }

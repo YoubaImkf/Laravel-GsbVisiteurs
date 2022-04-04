@@ -256,8 +256,58 @@ class PdoGsb{
 	  	return $ligne;
 	}
 	
+	// ========================ARCHIVE ET SUPPRIME========================
+	//-----Recup les infos ↓
+	public function getInfosVisiteurArchive($id){
+		$req = "select * from visiteur where id='$id'";
+    	$rs = $this->monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+
+	public function getInfosFicheFraisArchive($id){
+		$req = "select * from fichefrais where id='$id'";
+    	$rs = $this->monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+
+	public function getInfosLigneFraisForfaitArchive($id){
+		$req = "select * from lignefraisforfait where id='$id'";
+    	$rs = $this->monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+
+	public function getInfosLigneFraisHorsForFaitArchive($id){
+		$req = "select * from lignefraishorsforfait  where id='$id'";
+    	$rs = $this->monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+//-----END Recup les infos 
 
 
+//-----Archiver les infos ↓
+	public function archiverVisiteur($id,$nom,$prenom,$login,$mdp,$adresse,$cp,$ville,$dateEmbauche){	
+			
+		$req="INSERT INTO archive_visiteur VALUES('$id','$nom','$prenom','$login','$mdp','$adresse','$cp','$ville','$dateEmbauche')";
+
+		$rs = $this->monPdo->query($req);
+	 	$ligne = $rs->fetch();
+	  	return $ligne;
+	}
+//-----END Archiver les infos 
+
+//-----Supprimer les infos ↓
+	public function supprimerVisiteur($idDUvisiteur){	
+
+	$req="DELETE from visiteur WHERE id='$idDUvisiteur'";
+	$rs = $this->monPdo->query($req);
+	$ligne = $rs->fetch();
+	 return $ligne;
+	}
+//-----END Supprimer les infos 
 
 /**
  *  ----------------	fonction TP2 MODIFIER MDP:---------------
