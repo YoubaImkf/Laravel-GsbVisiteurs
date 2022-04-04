@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 class gestionnaireController extends Controller
 {
-    function listerVisiteur(){
+    function listerVisiteurs(){
         if(session('gestionnaire') != null){
             $gestionnaire = session('gestionnaire');
             $lesVisiteurs = PdoGsb::getVisiteur();//recupère tous les visiteurs
             $leVisiteur = " ";
 		//    dd($leVisiteur);
           
-            return view('listeVisiteur')
+            return view('listeVisiteurs')
                         ->with('lesVisiteurs',$lesVisiteurs)
                         ->with('gestionnaire', $gestionnaire)
                         ->with('leVisiteur', $leVisiteur);
