@@ -33,7 +33,8 @@
           <input id="annuler" type="reset" value="Effacer" size="20" />
         </p> 
         </div>
-          
+ 
+        @includeWhen($message != "", 'message', ['message' => $message])
         </form>
         
   @endsection 

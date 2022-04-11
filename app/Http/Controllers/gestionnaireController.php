@@ -16,6 +16,8 @@ class gestionnaireController extends Controller
             return view('listeVisiteurs')
                         ->with('lesVisiteurs',$lesVisiteurs)
                         ->with('gestionnaire', $gestionnaire)
+                        ->with('erreurs',null)
+                        ->with('message',null)
                         ->with('leVisiteur', $leVisiteur);
                    
         }
@@ -52,6 +54,8 @@ class gestionnaireController extends Controller
                         ->with('lesVisiteurs', $lesVisiteurs)
                         ->with('identite', $identite)
                         ->with('leVisiteur',$visiteur)
+                        ->with('erreurs',null)
+                        ->with('message',null)
                         //on fait en sorte de dire que "leVisiteur" de ListerVisiteur soit egal au $visiteur de la fonctionse lectionnerVisiteur
                         ->with('ficheFrais',  $ficheFrais)
                         ->with('lignefraisforfait',$lignefraisforfait);
@@ -67,7 +71,7 @@ class gestionnaireController extends Controller
             $identite = PdoGsb::getNOMVisiteur($idVisiteur );
 
             $infoVisiteur = PdoGsb::getInfosVisiteurArchive($idVisiteur);
-        
+            
             $leVisiteur = " ";
             $idVisi=$infoVisiteur['id'];
             
@@ -85,13 +89,23 @@ class gestionnaireController extends Controller
             PdoGsb::supprimerVisiteur($idVisiteur);
             $lesVisiteurs = PdoGsb::getVisiteur();
 
+            $message = "Visiteur bien supprimer et archiver";
+
             return view('listeVisiteurs')
+                        ->with('message',$message)
                         ->with('gestionnaire',$gestionnaire)
                         ->with('leVisiteur',$leVisiteur)
                         ->with('lesVisiteurs', $lesVisiteurs)
                         ->with('identite', $identite)
                         ->with('idVisiteur ',$idVisiteur);
     }
+    // else
+    // {
+    //         $erreurs[] = "Une erreur est survenue veuillez reessayer";
+    //         return view('listeVisiteurs')
+    //         ->with('erreurs',$erreurs);
+    // }   
+    
 
 
   }
