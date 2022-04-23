@@ -68,13 +68,43 @@ class gestionnaireController extends Controller
         if(session('gestionnaire') != null){
             $gestionnaire = session('gestionnaire'); 
             $idVisiteur = session('idVisiteur');
+
+
+
+            //1
+            $desLigneFraisHorsForFait= PdoGsb::getInfosLigneFraisHorsForFaitArchive($idVisiteur);
+            foreach(  $desLigneFraisHorsForFait as $uneLigneFraisHorsForFait)
+            {
+                PdoGsb::archiverLigneFraisHorsForfait($uneLigneFraisHorsForFait['idVisiteur'],$uneLigneFraisHorsForFait['mois'],$uneLigneFraisHorsForFait['libelle'],$uneLigneFraisHorsForFait['date'],$uneLigneFraisHorsForFait['montant']);
+                PdoGsb::supprimerlignefraishorsforfait($uneLigneFraisHorsForFait['idVisiteur']);
+            }
+
+
+
+            //2
+            $ligneFraisForfaitArchives = PdoGsb::getInfosLigneFraisForfaitArchive($idVisiteur);
+            foreach($ligneFraisForfaitArchives as $uneLigneFraisForfait)
+            {
+                PdoGsb::archiverLignesFraisForfait($uneLigneFraisForfait['idVisiteur'],$uneLigneFraisForfait['mois'],$uneLigneFraisForfait['idFraisForfait'],$uneLigneFraisForfait['quantite']);
+                PdoGsb::supprimerLigneFraisForfaits($uneLigneFraisForfait['idVisiteur']);
+            }
+
+
+             //3
+             $desFicheFrais= PdoGsb::getInfosFicheFraisArchive($idVisiteur);
+             foreach( $desFicheFrais as $uneFicheFrais)
+             {
+                 PdoGsb::archiverFicheForfait($uneFicheFrais['idVisiteur'],$uneFicheFrais['mois'],$uneFicheFrais['nbJustificatifs'],$uneFicheFrais['montantValide'],$uneFicheFrais['dateModif'],$uneFicheFrais['idEtat']);
+                 PdoGsb::supprimerFicheFrais($uneFicheFrais['idVisiteur']);
+             }
+
             $identite = PdoGsb::getNOMVisiteur($idVisiteur );
 
+
+            //4
             $infoVisiteur = PdoGsb::getInfosVisiteurArchive($idVisiteur);
-            
             $leVisiteur = " ";
             $idVisi=$infoVisiteur['id'];
-            
             $nomVisi=$infoVisiteur['nom'];
             $prenomVisi=$infoVisiteur['prenom'];
             $loginVisi = $infoVisiteur['login'];
@@ -83,11 +113,11 @@ class gestionnaireController extends Controller
             $cpVisi = $infoVisiteur['cp'];
             $villeVisi = $infoVisiteur['ville'];
             $datEmbaucheVisi = $infoVisiteur['dateEmbauche'];
-
             PdoGsb::archiverVisiteur($idVisi,$nomVisi,$prenomVisi,$loginVisi,$mdpVisi,$adresseVisi,$cpVisi,$villeVisi,$datEmbaucheVisi);
-        
             PdoGsb::supprimerVisiteur($idVisiteur);
+       
             $lesVisiteurs = PdoGsb::getVisiteur();
+
 
             $message = "Visiteur bien supprimer et archiver";
 

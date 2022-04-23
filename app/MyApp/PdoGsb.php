@@ -266,23 +266,23 @@ class PdoGsb{
 	}
 
 	public function getInfosFicheFraisArchive($id){
-		$req = "select * from fichefrais where id='$id'";
+		$req = "select * from fichefrais where idVisiteur='$id'";
     	$rs = $this->monPdo->query($req);
-		$ligne = $rs->fetch();
+		$ligne = $rs->fetchAll();
 		return $ligne;
 	}
 
 	public function getInfosLigneFraisForfaitArchive($id){
-		$req = "select * from lignefraisforfait where id='$id'";
+		$req = "select * from lignefraisforfait where idVisiteur='$id'";
     	$rs = $this->monPdo->query($req);
-		$ligne = $rs->fetch();
+		$ligne = $rs->fetchAll();
 		return $ligne;
 	}
 
 	public function getInfosLigneFraisHorsForFaitArchive($id){
-		$req = "select * from lignefraishorsforfait  where id='$id'";
+		$req = "select * from lignefraishorsforfait  where idVisiteur='$id'";
     	$rs = $this->monPdo->query($req);
-		$ligne = $rs->fetch();
+		$ligne = $rs->fetchAll();
 		return $ligne;
 	}
 //-----END Recup les infos 
@@ -293,20 +293,60 @@ class PdoGsb{
 			
 		$req="INSERT INTO archive_visiteur VALUES('$id','$nom','$prenom','$login','$mdp','$adresse','$cp','$ville','$dateEmbauche')";
 
-		$rs = $this->monPdo->query($req);
-	 	$ligne = $rs->fetch();
-	  	return $ligne;
+		$this->monPdo->exec($req);
 	}
+
+	public function archiverLignesFraisForfait($idVisiteur,$mois,$idFraisForfait,$quantite){  
+      
+		$req="INSERT INTO archive_lignefraisforfait VALUES('$idVisiteur','$mois','$idFraisForfait',$quantite)";
+  
+		$this->monPdo->exec($req);
+   }
+
+
+	public function archiverFicheForfait($idVisiteur,$mois,$nbJustificatifs,$montantValide,$dateModif,$idEta){  
+      
+		$req="INSERT INTO archive_fichefrais VALUES('$idVisiteur','$mois','$nbJustificatifs',$montantValide,'$dateModif','$idEta')";
+  
+		$this->monPdo->exec($req);
+   }
+
+	public function archiverLigneFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){  
+      
+		$req="INSERT INTO archives_lignefraishorsforfait VALUES(null ,'$idVisiteur','$mois','$libelle','$date',$montant)";
+  
+		$this->monPdo->exec($req);
+   }
+
 //-----END Archiver les infos 
+
+
 
 //-----Supprimer les infos ↓
 	public function supprimerVisiteur($idDUvisiteur){	
 
 	$req="DELETE from visiteur WHERE id='$idDUvisiteur'";
-	$rs = $this->monPdo->query($req);
-	$ligne = $rs->fetch();
-	 return $ligne;
+	$this->monPdo->exec($req);
 	}
+
+	public function supprimerLigneFraisForfaits($idDuVisiteur){  
+
+		$req="DELETE from lignefraisforfait WHERE idVisiteur='$idDuVisiteur'";
+		$this->monPdo->exec($req);
+  }
+
+  public function supprimerFicheFrais($idDuVisiteur){  
+
+	$req="DELETE from fichefrais WHERE idVisiteur='$idDuVisiteur'";
+	$this->monPdo->exec($req);
+}
+
+	public function supprimerlignefraishorsforfait($idDuVisiteur){  
+
+		$req="DELETE from lignefraishorsforfait WHERE idVisiteur='$idDuVisiteur'";
+		$this->monPdo->exec($req);
+	}
+
 //-----END Supprimer les infos 
 
 /**
